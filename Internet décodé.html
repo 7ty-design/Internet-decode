@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Internet décodé</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:#0a2238;scroll-padding-top:env(safe-area-inset-top,0px);--paper:#eef3f6;--ink:#0a2238;--muted:#4b5d70;--sun:#ffb703;--teal:#0f7f76;--coral:#e4572e}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#0b1826;--ink:#e9f1f7;--muted:#9fb3c4;--teal:#4fd1c5}}
+:root[data-theme=dark]{--paper:#0b1826;--ink:#e9f1f7;--muted:#9fb3c4;--teal:#4fd1c5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 "Bricolage Grotesque",system-ui,sans-serif}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0}
+h1{font-size:clamp(2.5rem,6vw,5rem)}
+h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+h3{font-size:1.25rem}
+.w{max-width:1080px;margin:auto;padding:0 22px}
+section{padding:84px 0;scroll-margin-top:64px}
+.hd{max-width:720px;margin-bottom:40px}
+.hd p{color:var(--muted);margin:14px 0 0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:#0a2238;color:#eef3f6}
+.top .w{display:flex;align-items:center;gap:26px;min-height:58px}
+.brand{font-weight:800;color:var(--sun);text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:20px;overflow-x:auto;min-width:0}
+nav a{color:#eef3f6;opacity:.8;text-decoration:none;white-space:nowrap;font-size:.92rem}
+.hero{background:#0a2238;color:#eef3f6;padding:64px 0 90px;overflow:hidden}
+.hero .w{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.hero p{font-size:1.15rem;opacity:.85;max-width:50ch;margin:24px 0 32px}
+.btn{display:inline-block;margin:0 10px 10px 0;padding:12px 22px;border:2px solid var(--sun);border-radius:99px;color:var(--sun);text-decoration:none;font-weight:600}
+.btn.s{background:var(--sun);color:#0a2238}
+svg{display:block;width:100%;height:auto}
+.hs{fill:#0a2238;stroke:#eef3f6;stroke-width:5}
+.st{fill:var(--paper);stroke:var(--ink);stroke-width:5}
+.lb{fill:#eef3f6;font:600 22px "Bricolage Grotesque",system-ui,sans-serif}
+.lbd{fill:var(--ink);font:600 16px "Bricolage Grotesque",system-ui,sans-serif}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.6,0,.2,1) forwards}
+.d2{animation-delay:.5s}.d3{animation-delay:1s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes flow{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.flow{stroke-dasharray:.2 .8;animation:flow 1.6s linear infinite}
+.pulse{stroke-dasharray:.12 .88;animation:flow 2.6s linear infinite}
+ol.metro{list-style:none;margin:0;padding:0 0 0 36px;border-left:7px solid var(--c);display:grid;gap:26px;max-width:780px}
+ol.metro li{position:relative}
+ol.metro li::before{content:"";position:absolute;left:-51px;top:6px;width:24px;height:24px;border-radius:50%;background:var(--paper);border:6px solid var(--c)}
+ol.metro b{display:block;font-size:1.4rem;margin-bottom:2px}
+.layers{display:grid;gap:12px;max-width:780px}
+.layers div{display:grid;grid-template-columns:minmax(150px,200px) 1fr;gap:18px;padding:14px 20px;border-left:10px solid var(--c)}
+.layers span{color:var(--muted)}
+.callout{margin-top:64px;border-left:8px solid var(--teal);padding:4px 0 4px 26px;max-width:70ch}
+.callout p{margin:10px 0 0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+.grid article{border-top:8px solid var(--c);padding-top:20px}
+.grid p{margin:10px 0 0;color:var(--muted)}
+.tips{list-style:none;margin:0;padding:0;display:grid;gap:22px;max-width:800px}
+.tips li{position:relative;padding-left:30px}
+.tips li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:14px;background:var(--coral)}
+.clips{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px}
+.clip{margin:0}
+.screen{background:#0a2238;border-radius:16px;overflow:hidden;aspect-ratio:16/9}
+.screen svg{height:100%}
+figcaption{display:flex;justify-content:space-between;gap:14px;margin-top:16px}
+figcaption p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.ctl{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:none;color:var(--ink);cursor:pointer}
+.paused *{animation-play-state:paused!important}
+ul.plain{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+a.l{color:var(--teal);font-weight:600}
+dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px 40px;margin:0}
+dt{font-weight:800;font-size:1.1rem}
+dd{margin:4px 0 0;color:var(--muted)}
+footer{background:#0a2238;color:#eef3f6;padding:36px 0 calc(36px + env(safe-area-inset-bottom,0px));font-size:.92rem}
+@media (max-width:820px){.hero .w{grid-template-columns:1fr}section{padding:64px 0}}
+@media (prefers-reduced-motion:reduce){.draw{stroke-dashoffset:0}*,*::before{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="w"><a class="brand" href="#accueil">Internet décodé</a><nav aria-label="Sections"><a href="#histoire">Histoire</a><a href="#fonctionnement">Fonctionnement</a><a href="#web">Web</a><a href="#securite">Sécurité</a><a href="#videos">Vidéos</a><a href="#enjeux">Enjeux</a><a href="#lexique">Lexique</a><a href="#sources">Sources</a></nav></div></header>
+
+<section class="hero" id="accueil"><div class="w">
+<div>
+<h1>Internet, le réseau qui relie le monde</h1>
+<p>Son histoire, son fonctionnement, sa sécurité et son avenir, expliqués pas à pas. En janvier 2024, environ 5,35 milliards de personnes l'utilisaient, soit 66 % de la population mondiale.</p>
+<a class="btn s" href="#histoire">Explorer l'histoire</a><a class="btn" href="#fonctionnement">Comprendre le fonctionnement</a>
+</div>
+<svg viewBox="0 0 520 420" role="img" aria-label="Plan animé d'un réseau">
+<path id="y" class="draw" pathLength="1" d="M50 330H170Q200 330 200 300V170Q200 140 230 140H440" fill="none" stroke="#ffb703" stroke-width="10" stroke-linecap="round"/>
+<path id="t" class="draw d2" pathLength="1" d="M110 60H290Q320 60 320 90V250Q320 280 350 280H470" fill="none" stroke="#4fd1c5" stroke-width="10" stroke-linecap="round"/>
+<path id="c" class="draw d3" pathLength="1" d="M230 400V270Q230 240 260 240H400" fill="none" stroke="#e4572e" stroke-width="10" stroke-linecap="round"/>
+<circle class="hs" cx="50" cy="330" r="13"/><circle class="hs" cx="200" cy="230" r="13"/><circle class="hs" cx="440" cy="140" r="13"/><circle class="hs" cx="110" cy="60" r="13"/><circle class="hs" cx="320" cy="190" r="13"/><circle class="hs" cx="470" cy="280" r="13"/><circle class="hs" cx="230" cy="400" r="13"/><circle class="hs" cx="400" cy="240" r="13"/>
+<text class="lb" x="22" y="372">Vous</text><text class="lb" x="340" y="196">Routeur</text><text class="lb" x="372" y="118">Serveur</text>
+<circle r="9" fill="#ffb703"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#y"/></animateMotion></circle>
+<circle r="8" fill="#4fd1c5"><animateMotion dur="6.5s" begin="2s" repeatCount="indefinite"><mpath href="#t"/></animateMotion></circle>
+<circle r="8" fill="#e4572e"><animateMotion dur="4.5s" begin="2.8s" repeatCount="indefinite"><mpath href="#c"/></animateMotion></circle>
+</svg>
+</div></section>
+
+<section id="histoire"><div class="w">
+<div class="hd"><h2>Une histoire de réseaux</h2><p>Internet ne vient pas d'une invention unique. Il s'est construit par étapes, de la recherche militaire et universitaire jusqu'au grand public.</p></div>
+<ol class="metro" style="--c:#ffb703">
+<li><b>1969</b>ARPANET relie deux ordinateurs, à l'UCLA et à Stanford. Le premier message ne contient que « LO » : le système plante avant la fin du mot « LOGIN ».</li>
+<li><b>1971</b>Ray Tomlinson envoie le premier courriel et choisit le symbole @ pour séparer le nom de l'utilisateur de celui de sa machine.</li>
+<li><b>1974</b>Vint Cerf et Bob Kahn décrivent le protocole TCP, qui découpe les données en paquets et les réassemble à l'arrivée.</li>
+<li><b>1983</b>ARPANET adopte officiellement TCP/IP. Le système de noms de domaine (DNS) apparaît.</li>
+<li><b>1989</b>Tim Berners-Lee, au CERN, propose le World Wide Web : des pages reliées entre elles par des liens hypertextes.</li>
+<li><b>1991</b>Le premier site web est mis en ligne le 6 août. Il explique ce qu'est le Web.</li>
+<li><b>2005</b>YouTube est fondé. Sa toute première vidéo, « Me at the zoo », est publiée en avril.</li>
+<li><b>2007</b>L'iPhone démocratise l'Internet mobile.</li>
+<li><b>2018</b>Le RGPD entre en vigueur dans l'Union européenne pour mieux protéger les données personnelles.</li>
+</ol>
+</div></section>
+
+<section id="fonctionnement"><div class="w">
+<div class="hd"><h2>Que se passe-t-il quand vous tapez une adresse ?</h2><p>Prenons l'exemple de « exemple.fr ». En une fraction de seconde, la requête traverse plusieurs étapes, puis la réponse fait le chemin inverse.</p></div>
+<svg viewBox="0 0 680 150" role="img" aria-label="Aller-retour d'un paquet entre vous, le DNS, les routeurs et le serveur">
+<path id="f" d="M60 60H620" fill="none" stroke="#9fb3c4" stroke-width="4"/>
+<path id="b" d="M620 92H60" fill="none" stroke="#e4572e" stroke-width="3" stroke-dasharray="6 8"/>
+<circle class="st" cx="60" cy="60" r="11"/><circle class="st" cx="250" cy="60" r="11"/><circle class="st" cx="420" cy="60" r="11"/><circle class="st" cx="620" cy="60" r="11"/>
+<text class="lbd" x="60" y="28" text-anchor="middle">Vous</text><text class="lbd" x="250" y="28" text-anchor="middle">DNS</text><text class="lbd" x="420" y="28" text-anchor="middle">Routeurs</text><text class="lbd" x="620" y="28" text-anchor="middle">Serveur</text>
+<circle r="8" fill="#ffb703"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#f"/></animateMotion></circle>
+<circle r="7" fill="#e4572e"><animateMotion dur="4s" begin="2s" repeatCount="indefinite"><mpath href="#b"/></animateMotion></circle>
+</svg>
+<ol class="metro" style="--c:#e4572e;margin-top:48px">
+<li><b>Vous saisissez l'adresse</b>Le navigateur reçoit « exemple.fr » et prépare la demande.</li>
+<li><b>Le DNS traduit le nom</b>Un annuaire renvoie l'adresse IP du serveur, par exemple 192.0.2.10.</li>
+<li><b>La connexion s'ouvre</b>TCP établit la liaison par une poignée de main en trois temps : SYN, SYN-ACK, ACK.</li>
+<li><b>La requête part en HTTPS</b>Le navigateur demande la page, et les échanges sont chiffrés avec TLS.</li>
+<li><b>Les paquets voyagent</b>Les données sont découpées en paquets. Des routeurs choisissent le chemin le plus adapté à chaque étape.</li>
+<li><b>La page s'affiche</b>Le serveur renvoie le HTML, le CSS, le JavaScript et les images. Le navigateur assemble le tout.</li>
+</ol>
+<h3 style="margin:60px 0 22px">Quatre couches pour un même message</h3>
+<div class="layers">
+<div style="--c:#ffb703"><strong>Application</strong><span>HTTP, DNS, SMTP : les services que vous utilisez.</span></div>
+<div style="--c:#0f7f76"><strong>Transport</strong><span>TCP, UDP : fiabilité et découpage en paquets.</span></div>
+<div style="--c:#e4572e"><strong>Internet</strong><span>IP : adressage et routage des paquets.</span></div>
+<div style="--c:var(--ink)"><strong>Accès réseau</strong><span>Ethernet, Wi-Fi, fibre : la liaison physique.</span></div>
+</div>
+<div class="callout"><h3>Internet n'est pas le Web</h3><p>Internet est l'infrastructure : des millions de réseaux interconnectés qui transportent les données. Le Web n'en est qu'un service, fondé sur les pages et les liens. Le courriel, la téléphonie sur IP ou les jeux en ligne utilisent aussi Internet sans passer par le Web.</p></div>
+</div></section>
+
+<section id="web"><div class="w">
+<div class="hd"><h2>Du Web statique au Web participatif</h2></div>
+<div class="grid">
+<article style="--c:#ffb703"><h3>Web 1.0</h3><p>Environ 1990 au début des années 2000. On consulte : pages statiques, sites personnels, annuaires.</p></article>
+<article style="--c:#0f7f76"><h3>Web 2.0</h3><p>Années 2000 à 2010. On participe : blogs, réseaux sociaux, encyclopédies collaboratives, vidéos publiées par les internautes.</p></article>
+<article style="--c:#e4572e"><h3>Web 3.0</h3><p>En construction. Un Web plus intelligent et plus décentralisé : web sémantique, intelligence artificielle, identité numérique. Ses contours restent débattus.</p></article>
+</div>
+</div></section>
+
+<section id="securite"><div class="w">
+<div class="hd"><h2>Protéger sa présence en ligne</h2><p>Quelques réflexes simples évitent la plupart des problèmes.</p></div>
+<ul class="tips">
+<li><strong>Des mots de passe longs et uniques.</strong> Un mot de passe par compte, rangé dans un gestionnaire.</li>
+<li><strong>La double authentification.</strong> Un second facteur, comme un code reçu sur téléphone, protège les comptes importants.</li>
+<li><strong>Méfiance face à l'hameçonnage.</strong> Un message qui presse d'agir et demande vos identifiants est presque toujours une arnaque.</li>
+<li><strong>Les mises à jour.</strong> Installer les correctifs de sécurité dès leur sortie ferme les failles connues.</li>
+<li><strong>Le cadenas ne suffit pas.</strong> Le HTTPS chiffre les échanges, mais ne garantit pas que le site est honnête.</li>
+<li><strong>Le Wi-Fi public.</strong> Évitez les opérations sensibles, ou passez par un VPN.</li>
+</ul>
+</div></section>
+
+<section id="videos"><div class="w">
+<div class="hd"><h2>Voir le réseau en mouvement</h2><p>Trois animations pour visualiser les notions clés, puis des ressources en français pour aller plus loin.</p></div>
+<div class="clips">
+<figure class="clip">
+<div class="screen"><svg viewBox="0 0 400 225" role="img" aria-label="Un paquet traverse des routeurs">
+<path id="r" d="M40 165L150 95L250 150L360 60" fill="none" stroke="#4fd1c5" stroke-width="5" stroke-linejoin="round"/>
+<circle class="hs" cx="40" cy="165" r="9"/><circle class="hs" cx="150" cy="95" r="9"/><circle class="hs" cx="250" cy="150" r="9"/><circle class="hs" cx="360" cy="60" r="9"/>
+<text class="lb" x="16" y="200" style="font-size:16px">Vous</text><text class="lb" x="290" y="44" style="font-size:16px">Serveur</text>
+<circle r="7" fill="#ffb703"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#r"/></animateMotion></circle>
+<circle r="6" fill="#e4572e"><animateMotion dur="4s" begin="2s" repeatCount="indefinite"><mpath href="#r"/></animateMotion></circle>
+</svg></div>
+<figcaption><div><h3>Le voyage d'un paquet</h3><p>Chaque donnée traverse plusieurs routeurs avant d'arriver.</p></div><button class="ctl" type="button" aria-label="Pause">❚❚</button></figcaption>
+</figure>
+<figure class="clip">
+<div class="screen"><svg viewBox="0 0 400 225" role="img" aria-label="Un nom de domaine devient une adresse IP">
+<rect x="26" y="88" width="150" height="50" rx="12" fill="#12304d" stroke="#4fd1c5" stroke-width="2"/>
+<text class="lb" x="101" y="120" text-anchor="middle" style="font-size:19px">exemple.fr</text>
+<rect x="224" y="88" width="150" height="50" rx="12" fill="#12304d" stroke="#ffb703" stroke-width="2"/>
+<text class="lb" x="299" y="120" text-anchor="middle" style="font-size:19px">192.0.2.10</text>
+<path class="flow" pathLength="1" d="M186 113H220" fill="none" stroke="#ffb703" stroke-width="4" stroke-linecap="round"/>
+</svg></div>
+<figcaption><div><h3>Du nom à l'adresse</h3><p>Le DNS transforme « exemple.fr » en adresse IP, que les machines savent utiliser.</p></div><button class="ctl" type="button" aria-label="Pause">❚❚</button></figcaption>
+</figure>
+<figure class="clip">
+<div class="screen"><svg viewBox="0 0 400 225" role="img" aria-label="Un câble sous-marin relie deux continents">
+<rect width="400" height="225" fill="#11406a"/>
+<path d="M-10 170Q40 120 90 160T130 230H-10Z" fill="#1f4f6b"/>
+<path d="M410 40Q340 10 310 70T300 150Q360 170 410 130Z" fill="#1f4f6b"/>
+<path d="M100 150Q200 40 300 110" fill="none" stroke="#ffb703" stroke-opacity=".35" stroke-width="3"/>
+<path class="pulse" pathLength="1" d="M100 150Q200 40 300 110" fill="none" stroke="#ffe08a" stroke-width="5" stroke-linecap="round"/>
+<circle cx="100" cy="150" r="6" fill="#ffe08a"/><circle cx="300" cy="110" r="6" fill="#ffe08a"/>
+</svg></div>
+<figcaption><div><h3>Sous les océans</h3><p>Des câbles sous-marins transportent la grande majorité du trafic intercontinental.</p></div><button class="ctl" type="button" aria-label="Pause">❚❚</button></figcaption>
+</figure>
+</div>
+<h3 style="margin:56px 0 0">Pour aller plus loin</h3>
+<ul class="plain" style="margin-top:18px">
+<li><a class="l" href="https://www.enseignementsup-recherche.gouv.fr/ressources-pedagogiques/notice/view/Kezako-Internet">« Comment fonctionne Internet ? », série Kezako (Unisciel, 2013)</a> : FAI, réseaux, Wi-Fi, bits et données, expliqués simplement.</li>
+<li><a class="l" href="https://www.youtube.com/@Scienceparticipative">« Internet, IP, un protocole universel », MOOC SNT (environ 6 min 30)</a>, sur la chaîne YouTube Scienceparticipative.</li>
+</ul>
+</div></section>
+
+<section id="enjeux"><div class="w">
+<div class="hd"><h2>Un monde connecté, des défis</h2></div>
+<div class="grid">
+<article style="--c:#ffb703"><h3>Des usages partout</h3><p>Éducation à distance, commerce en ligne, télémédecine, travail à distance, streaming : Internet structure la vie quotidienne.</p></article>
+<article style="--c:#0f7f76"><h3>Une fracture persistante</h3><p>Environ un tiers de l'humanité n'est pas encore connecté. Les écarts entre pays, villes et campagnes restent importants.</p></article>
+<article style="--c:#e4572e"><h3>Un coût énergétique</h3><p>Les centres de données consomment une part croissante de l'électricité mondiale. La sobriété numérique devient un enjeu.</p></article>
+<article style="--c:var(--ink)"><h3>Un avenir en chantier</h3><p>IPv6 offre un nombre d'adresses quasi illimité. La 5G, les satellites en orbite basse et l'Internet des objets progressent. Le chiffrement devra évoluer face à l'informatique quantique.</p></article>
+</div>
+</div></section>
+
+<section id="lexique"><div class="w">
+<div class="hd"><h2>Lexique</h2></div>
+<dl>
+<div><dt>IP</dt><dd>Adresse numérique attribuée à chaque appareil connecté.</dd></div>
+<div><dt>DNS</dt><dd>Service qui traduit un nom de domaine en adresse IP.</dd></div>
+<div><dt>URL</dt><dd>Adresse complète d'une ressource : protocole, domaine et chemin.</dd></div>
+<div><dt>Serveur</dt><dd>Ordinateur qui fournit des services ou des contenus.</dd></div>
+<div><dt>FAI</dt><dd>Fournisseur d'accès à Internet, qui vous connecte au réseau.</dd></div>
+<div><dt>Latence</dt><dd>Délai entre une demande et sa réponse, souvent mesuré par le « ping ».</dd></div>
+<div><dt>Bande passante</dt><dd>Quantité de données transmissibles par seconde.</dd></div>
+<div><dt>Cookie</dt><dd>Petit fichier déposé par un site pour mémoriser des informations.</dd></div>
+</dl>
+</div></section>
+
+<section id="sources"><div class="w">
+<div class="hd"><h2>Sources</h2><p>Pour vérifier et citer les informations de ce dossier.</p></div>
+<ul class="plain">
+<li><a class="l" href="https://home.cern/science/computing/birth-web">CERN, « The birth of the Web »</a></li>
+<li><a class="l" href="https://www.rfc-editor.org/rfc/rfc791">RFC 791, Internet Protocol (IP)</a></li>
+<li><a class="l" href="https://www.rfc-editor.org/rfc/rfc793">RFC 793, Transmission Control Protocol (TCP)</a></li>
+<li><a class="l" href="https://fr.wikipedia.org/wiki/Histoire_d%27Internet">Wikipédia, « Histoire d'Internet »</a></li>
+</ul>
+</div></section>
+
+<footer><div class="w">Internet décodé : dossier de recherche en français. Schémas et animations créés pour ce site.</div></footer>
+
+<script>
+document.querySelectorAll('.ctl').forEach(function(b){b.addEventListener('click',function(){var f=b.closest('.clip'),s=f.querySelector('svg'),p=!f.classList.contains('paused');f.classList.toggle('paused',p);if(p){s.pauseAnimations()}else{s.unpauseAnimations()}b.textContent=p?'▶':'❚❚';b.setAttribute('aria-label',p?'Lecture':'Pause');});});
+</script>
+</body>
+</html>
